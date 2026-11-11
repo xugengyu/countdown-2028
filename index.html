@@ -2,102 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f8f2">
-  <meta name="description" content="A live countdown to November 15, 2028, at midnight Pacific time.">
-  <title>November 15, 2028 · The Countdown</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23234538'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='44'%3E⏳%3C/text%3E%3C/svg%3E">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#070a0d">
+  <meta name="description" content="Time until liftoff. November 15, 2028, midnight Pacific.">
+  <title>Time Until Liftoff</title>
   <style>
-:root{color-scheme:light;--paper:#f7f8f2;--ink:#234538;--muted:#647568;--line:#dce3d6;--card:#edf1e6}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
-.page{max-width:1440px;min-height:100svh;margin:auto;padding:0 5.5%;display:flex;flex-direction:column}
-header{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:108px;border-bottom:1px solid var(--line)}
-.wordmark{color:inherit;text-decoration:none;font-size:12px;font-weight:650;letter-spacing:2px;display:flex;align-items:center;gap:12px}.mark{font-family:Georgia,serif;font-size:34px;font-weight:400;line-height:1}
-.live{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--muted)}.live-dot{height:6px;width:6px;border-radius:50%;background:#66835e;box-shadow:0 0 0 4px #e8eddf}
-main{flex:1;text-align:center;padding:72px 0 64px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.eyebrow{font-size:10px;font-weight:600;letter-spacing:2.4px;display:flex;gap:16px;align-items:center}.eyebrow span{width:28px;height:1px;background:#a6b59c}
-h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(48px,5.5vw,80px);font-weight:400;letter-spacing:-3px;line-height:1.08;margin:28px 0 23px}h1 em{font-weight:400;color:#71835f}
-.destination{margin:0;color:var(--muted);font-size:15px}.destination time{font-weight:600;color:var(--ink)}
-.countdown{display:flex;align-items:center;justify-content:center;gap:15px;width:100%;max-width:930px;margin:49px 0 28px}
-.unit{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;min-width:0;min-height:172px;background:var(--card);border:1px solid #e1e7d9;border-radius:10px;padding:21px 8px 22px}.unit.seconds{background:#e4ead9}
-.value{font-size:clamp(46px,6.1vw,84px);font-weight:350;line-height:1.15;letter-spacing:-3px;font-variant-numeric:tabular-nums}.label{font-size:10px;letter-spacing:2.4px;color:var(--muted);margin-top:14px}.separator{font-family:Georgia,serif;font-size:30px;color:#a4b298;margin-top:-20px}
-.date-note{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;font-size:12px;color:var(--muted)}.date-note>span:first-child{font-size:18px}.dot{color:#b2bda9}.divider{margin-top:43px;display:flex;align-items:center;gap:16px;color:#8b9a7a;font-size:15px}.divider:before,.divider:after{content:"";height:1px;width:52px;background:var(--line)}
-.closing{font-family:Georgia,serif;font-style:italic;color:#7c8775;font-size:16px;margin:17px 0 0}.arrival{font-family:Georgia,serif;font-size:23px;margin:0 0 25px}.notice{color:var(--ink)}
-footer{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:76px;border-top:1px solid var(--line);font-size:10px;letter-spacing:1px;color:#788571}.footer-dot{margin:0 8px}
-a:focus-visible{outline:2px solid var(--ink);outline-offset:8px;border-radius:2px}
-@media(min-width:1600px){main{padding-block:90px}}
-@media(max-width:700px){.page{padding-inline:6%}header{min-height:82px}.live{font-size:0;gap:0}.live-dot{width:7px;height:7px}.wordmark{font-size:10px;letter-spacing:1.5px}main{padding:55px 0}.eyebrow{font-size:8px;letter-spacing:1.7px;gap:10px}.eyebrow span{width:18px}h1{letter-spacing:-2px;font-size:54px}.destination{font-size:13px}.countdown{gap:7px;margin-top:36px}.unit{min-height:120px;padding:17px 4px;border-radius:7px}.value{font-size:clamp(30px,8.5vw,56px);letter-spacing:-1.5px}.label{font-size:8px;letter-spacing:1px;margin-top:12px}.separator{font-size:20px;margin-top:-17px}.date-note{font-size:10px;gap:7px}.divider{margin-top:34px}.closing{font-size:14px}footer{flex-direction:column;justify-content:center;gap:10px;padding:20px 0;font-size:8px;letter-spacing:.8px}}
-@media(max-width:360px){h1{font-size:46px}.countdown{gap:4px}.separator{font-size:15px}.value{font-size:29px}.label{font-size:7px}}
-</style>
-  <script type="module">
-// November 15, 2028, 00:00 in America/Los_Angeles (PST, UTC-8).
-// A fixed instant makes the countdown identical in every visitor's time zone.
-const TARGET = Date.parse("2028-11-15T00:00:00-08:00");
-
-function remaining(now = Date.now()) {
-  const total = Math.max(0, Math.ceil((TARGET - now) / 1000));
-  return {
-    days: Math.floor(total / 86400),
-    hours: Math.floor(total / 3600) % 24,
-    minutes: Math.floor(total / 60) % 60,
-    seconds: total % 60,
-    done: total === 0
-  };
-}
-
-
-const units = ["days", "hours", "minutes", "seconds"];
-const fields = Object.fromEntries(units.map(unit => [unit, document.getElementById(unit)]));
-const arrival = document.getElementById("arrival");
-let timer;
-
-function update() {
-  const value = remaining();
-  for (const unit of units) {
-    const text = String(value[unit]).padStart(unit === "days" ? 1 : 2, "0");
-    if (fields[unit].textContent !== text) fields[unit].textContent = text;
-  }
-  arrival.hidden = !value.done;
-  if (value.done && timer) {
-    clearInterval(timer);
-    timer = undefined;
-  }
-  return value.done;
-}
-
-// Recompute from the clock; intervals never accumulate timing drift.
-if (!update()) timer = setInterval(update, 250);
-document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) update();
-});
-</script>
+    :root { color-scheme: dark; font-family: "Consolas", "SFMono-Regular", monospace; color: #fff; background: #070a0d; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .background, .shade { position: fixed; inset: 0; width: 100%; height: 100%; }
+    .background { left: auto; right: 0; width: min(100vw, 177.78svh); object-fit: contain; opacity: .76; mask-image: linear-gradient(90deg, transparent, #000 28%); }
+    .shade { background: linear-gradient(180deg, #03070b7a, #03070b66 40%, #03070bd9), linear-gradient(90deg, #03070b88, transparent 80%); }
+    main { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 60px 7%; }
+    h1 { margin: 0 0 36px; font-size: clamp(11px, 1.4vw, 17px); font-weight: 400; letter-spacing: .3em; color: #c7d5db; }
+    h1::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 15px; border-radius: 50%; background: #d6f2b3; box-shadow: 0 0 13px #d6f2b355; vertical-align: 2px; }
+    .timer { display: flex; align-items: baseline; gap: clamp(8px, 1.5vw, 22px); width: min(100%, 1180px); font-variant-numeric: tabular-nums; text-shadow: 0 2px 32px #0008; }
+    .prefix { font-size: clamp(23px, 4.6vw, 65px); color: #d6f2b3; font-weight: 400; }
+    .unit { display: flex; flex-direction: column; align-items: center; min-width: 0; }
+    .digits { font-size: clamp(42px, 8vw, 118px); line-height: 1; font-weight: 700; letter-spacing: -.055em; }
+    .label { margin-top: 22px; font-size: clamp(8px, .9vw, 12px); font-weight: 400; letter-spacing: .23em; color: #b1c1ca; }
+    .separator { font-size: clamp(24px, 5vw, 72px); color: #a0b6bd88; align-self: flex-start; line-height: 1.3; }
+    .seconds .digits { color: #d6f2b3; }
+    .liftoff { font-size: clamp(50px, 12vw, 150px); letter-spacing: -.06em; color: #d6f2b3; margin: 0; }
+    [hidden] { display: none !important; }
+    .motion { position: fixed; right: 25px; bottom: 25px; display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid #ffffff35; border-radius: 50%; color: #dce5e8; background: #03070b66; cursor: pointer; }
+    .motion:hover { background: #ffffff20; }
+    .motion:focus-visible { outline: 2px solid #d6f2b3; outline-offset: 5px; }
+    .motion svg { width: 15px; height: 15px; fill: currentColor; }
+    @media(max-width:700px) {
+      main { align-items: center; padding: 50px 5%; }
+      h1 { font-size: 10px; letter-spacing: .2em; margin-bottom: 28px; }
+      .timer { justify-content: center; gap: 6px; }
+      .digits { font-size: clamp(30px, 8.4vw, 58px); }
+      .prefix { font-size: clamp(16px, 4.2vw, 28px); }
+      .separator { font-size: clamp(18px, 4.5vw, 30px); }
+      .label { font-size: 7px; letter-spacing: .12em; margin-top: 15px; }
+      .background { top: 50%; height: auto; aspect-ratio: 16 / 9; transform: translateY(-50%); mask-image: linear-gradient(transparent, #000 25%, #000 75%, transparent); }
+      .motion { right: 18px; bottom: 18px; }
+    }
+  </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <a class="wordmark" href="./" aria-label="The Countdown home"><span class="mark" aria-hidden="true">◷</span> THE COUNTDOWN</a>
-      <span class="live"><span class="live-dot" aria-hidden="true"></span> A little closer, every second</span>
-    </header>
-    <main>
-      <div class="eyebrow"><span></span> SOMETHING TO LOOK FORWARD TO <span></span></div>
-      <h1>Every second brings<br>us <em>closer.</em></h1>
-      <p class="destination">Counting down to <time datetime="2028-11-15T00:00:00-08:00">November 15, 2028</time></p>
-      <div class="countdown" role="timer" aria-label="Time remaining until November 15, 2028" aria-live="off">
-        <div class="unit"><span class="value" id="days">—</span><span class="label">DAYS</span></div>
-        <span class="separator" aria-hidden="true">:</span>
-        <div class="unit"><span class="value" id="hours">—</span><span class="label">HOURS</span></div>
-        <span class="separator" aria-hidden="true">:</span>
-        <div class="unit"><span class="value" id="minutes">—</span><span class="label">MINUTES</span></div>
-        <span class="separator" aria-hidden="true">:</span>
-        <div class="unit seconds"><span class="value" id="seconds">—</span><span class="label">SECONDS</span></div>
-      </div>
-      <p class="arrival" role="status" id="arrival" hidden>The wait is over. November 15 is here.</p>
-      <noscript><p class="notice">Enable JavaScript to see the live countdown.</p></noscript>
-      <div class="date-note"><span aria-hidden="true">◷</span> Wednesday, November 15, 2028 <span class="dot" aria-hidden="true">·</span> 12:00 AM Pacific</div>
-      <div class="divider"><span aria-hidden="true">✦</span></div>
-      <p class="closing">A day at a time. A moment to anticipate.</p>
-    </main>
-    <footer><span>THE FUTURE IS ON ITS WAY.</span><span>America / Los Angeles <span class="footer-dot" aria-hidden="true">·</span> PST (UTC−8)</span></footer>
-  </div>
+  <img class="background" id="background" src="./falcon-venting-still.jpg" alt="" aria-hidden="true">
+  <div class="shade" aria-hidden="true"></div>
+  <main>
+    <h1>TIME UNTIL LIFTOFF</h1>
+    <div class="timer" id="timer" role="timer" aria-label="Time until liftoff on November 15, 2028, at midnight Pacific" aria-live="off">
+      <span class="prefix" aria-hidden="true">T−</span>
+      <div class="unit"><span class="digits" id="days">—</span><span class="label">DAYS</span></div>
+      <span class="separator" aria-hidden="true">:</span>
+      <div class="unit"><span class="digits" id="hours">—</span><span class="label">HOURS</span></div>
+      <span class="separator" aria-hidden="true">:</span>
+      <div class="unit"><span class="digits" id="minutes">—</span><span class="label">MINUTES</span></div>
+      <span class="separator" aria-hidden="true">:</span>
+      <div class="unit seconds"><span class="digits" id="seconds">—</span><span class="label">SECONDS</span></div>
+    </div>
+    <p class="liftoff" id="liftoff" role="status" hidden>LIFTOFF</p>
+    <noscript>Enable JavaScript to see the countdown.</noscript>
+  </main>
+  <button class="motion" id="motion" type="button" aria-label="Pause background animation" hidden>
+    <svg id="pause-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h3v12H4zm5 0h3v12H9z"/></svg>
+    <svg id="play-icon" viewBox="0 0 16 16" aria-hidden="true" hidden><path d="M4 2l10 6-10 6z"/></svg>
+  </button>
+  <script type="module">
+    const TARGET = Date.parse("2028-11-15T00:00:00-08:00");
+    function remaining(now = Date.now()) {
+      const total = Math.max(0, Math.ceil((TARGET - now) / 1000));
+      return { days: Math.floor(total / 86400), hours: Math.floor(total / 3600) % 24, minutes: Math.floor(total / 60) % 60, seconds: total % 60, done: total === 0 };
+    }
+    const units = ["days", "hours", "minutes", "seconds"];
+    const fields = Object.fromEntries(units.map(unit => [unit, document.getElementById(unit)]));
+    let interval;
+    function update() {
+      const value = remaining();
+      for (const unit of units) {
+        const text = String(value[unit]).padStart(unit === "days" ? 3 : 2, "0");
+        if (fields[unit].textContent !== text) fields[unit].textContent = text;
+      }
+      document.getElementById("timer").hidden = value.done;
+      document.getElementById("liftoff").hidden = !value.done;
+      if (value.done && interval) { clearInterval(interval); interval = undefined; }
+      return value.done;
+    }
+    if (!update()) interval = setInterval(update, 250);
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) update(); });
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    const background = document.getElementById("background");
+    const motion = document.getElementById("motion");
+    let playing = !reducedMotion.matches;
+    function applyMotion() {
+      background.src = playing ? "./falcon-venting.gif" : "./falcon-venting-still.jpg";
+      motion.setAttribute("aria-label", playing ? "Pause background animation" : "Play background animation");
+      document.getElementById("pause-icon").toggleAttribute("hidden", !playing);
+      document.getElementById("play-icon").toggleAttribute("hidden", playing);
+    }
+    motion.hidden = false;
+    motion.addEventListener("click", () => { playing = !playing; applyMotion(); });
+    reducedMotion.addEventListener("change", () => { playing = !reducedMotion.matches; applyMotion(); });
+    applyMotion();
+  </script>
 </body>
 </html>
